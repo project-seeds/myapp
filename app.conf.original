@@ -1,0 +1,4 @@
+db.host = DB_HOST
+db.user = myapp
+db.port = 5432
+db.dbname = myapp

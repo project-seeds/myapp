@@ -1,0 +1,47 @@
+- name: setting up a postgres db
+  hosts: all
+
+  tasks:
+    - name: Install, configure, and start postgres
+      become: yes
+      block:
+        - name: install postgres
+          apt:
+            name: postgresql
+            state: present
+
+        - name: install postgresql-contrib
+          apt:
+            name: postgresql-contrib
+            state: present
+
+        - name: ensure postgres user "myapp" is created
+          command: sudo -u postgres createuser -s myapp
+          ignore_errors: true
+
+        - name: ensure postgres db "myapp" is created
+          command: sudo -u postgres createdb myapp
+          ignore_errors: true
+
+        - name: create new linux user for postgres db
+          user:
+            name: myapp
+            password: "{{ '123456' | password_hash('sha512')}}"
+
+        - name: configure postgres to allow accept internal connections
+          replace:
+            path: /etc/postgresql/12/main/pg_hba.conf
+            regexp: '^# Put your actual configuration here$'
+            replace: |
+              host  all  all  0.0.0.0/0  trust
+
+        - name: allow postgres to bind on all interfaces so k8s service can use the private ip to connect to it
+          replace:
+            path: /etc/postgresql/12/main/postgresql.conf
+            regexp: '^#listen_addresses.*$'
+            replace: "listen_addresses = '*'"
+
+        - name: restart service postgres after configuration
+          service:
+            name: postgresql
+            state: restarted
