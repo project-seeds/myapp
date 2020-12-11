@@ -1,4 +1,4 @@
-# On Shattaf user profile micro service
+# myapp micro service
 
 ### prerequisite:
 
