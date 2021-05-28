@@ -15,6 +15,6 @@ else
   exit -1
 fi
 
-git commit -am "renaming app to $appName"
+cd ../ ; mv myapp $appName; cd $appName
 
 echo "The app has renamed to $appName"
