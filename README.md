@@ -1,6 +1,8 @@
-# myapp micro service
+# $appName micro service
 
 ### prerequisite:
+
+* run `./rename.sh` to rename the application. e.g. `./rename.sh todoApi`
 
 * run `./create-db.sh` to create a VM preconfigured with postgres db engine
 (requires vermin, virtualbox and ansbile)
