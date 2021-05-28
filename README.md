@@ -7,6 +7,8 @@
 * run `./create-db.sh` to create a VM preconfigured with postgres db engine
 (requires vermin, virtualbox and ansbile)
 
+* run `go get -d ./...` to install all dependencies
+
 * run `./run.sh` to run the app   
 it requires the following golang utilities:
 ```
