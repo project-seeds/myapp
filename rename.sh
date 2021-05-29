@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ -z "$1" ]
   then
     echo "Usage $0 <appName>"
@@ -18,3 +20,5 @@ fi
 cd ../ ; mv myapp $appName; cd $appName
 
 echo "The app has renamed to $appName"
+
+rm -- "$0"

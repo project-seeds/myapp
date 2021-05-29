@@ -6,6 +6,7 @@ import (
 	"myapp/cmd/api/routes"
 	"myapp/pkg/commons/dbutil"
 	"myapp/pkg/profile"
+	"time"
 )
 
 // @title Swagger Example API
@@ -30,6 +31,12 @@ func main() {
 
 	router := gin.Default()
 	routes.Configure(router)
+
+	go func() {
+		time.Sleep(50 * time.Millisecond)
+		println("\nmyapp started at: http://localhost:8080/swagger/index.html\n")
+	}()
+
 	_ = router.Run()
 }
 

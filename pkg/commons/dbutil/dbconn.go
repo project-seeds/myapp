@@ -6,7 +6,6 @@ import (
 	"github.com/mhewedy/go-conf"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"myapp/pkg/commons/env"
 	"time"
 )
 
@@ -16,7 +15,7 @@ func New() *gorm.DB {
 		host     = conf.Get("db.host")
 		port     = conf.GetInt("db.port")
 		user     = conf.Get("db.user")
-		password = env.Get("DB_PASSWORD", "123456")
+		password = conf.Get("db.password")
 		dbname   = conf.Get("db.dbname")
 	)
 
